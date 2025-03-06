@@ -1,6 +1,6 @@
 # F.Rakin_Enigma_Machine
 
-# Select a cipher that you will use in your program. 
+# Chosen cipher : Ceaser Cipher 
 
 # Create a program that will start by asking the user whether they want to decrypt or encrypt a message.
 
