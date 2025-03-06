@@ -5,12 +5,17 @@
 # Either call a function to encrypt or to decrypt the string.
 
 # Create two functions that will accept parameters in the form of a list or a dictionary that will contain the string meant to be encrypted or decrypted. 
-def encrypter(message: list) -> str:
+def encrypter(message: list, shift_value: int) -> str:
     """
     This function encrypts the message into a secret code 
     """
+    alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    
+    for alphabet in alphabets:
+        print(alphabet)
 
-def decrypter(secret_message: list) -> str:
+def decrypter(secret_message: list, shift_value: int) -> str:
     """
     This function decrypts the secret code into a message
     """
@@ -32,16 +37,18 @@ def option():
             choice = input("Please choose to encrypt or decrypt a message [e/d] : ").strip().lower()
 
             # Accept a string that the program will either encrypt or decrypt.
-            message = input("\nWhat is your secret message? : ")
+            message = input("\nWhat is your secret message? : ").strip().lower()
+
+            shift_value = int(input("Please enter a shift value : "))
             
             # Call the encrypter function to encrypt the message
             if choice == "e":
-                encrypter([message])
+                encrypter([message], shift_value)
                 break
 
             # Call th decrypter function to decrypt the message
             elif choice == "d":
-                decrypter([message])
+                decrypter([message], shift_value)
                 break
 
             # Continue the loop if a valid choice is not entered
@@ -53,5 +60,5 @@ def option():
         except ValueError:
             print("Please input a valid arguements! ")
             continue
- 
-option()
+
+encrypter(["boy"], 1)
