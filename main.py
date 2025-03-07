@@ -10,11 +10,28 @@ def encrypter(message: list, shift_value: int) -> str:
     This function encrypts the message into a secret code 
     """
     alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
-                  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+                  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+"
+                  "[", "]", "|", "{", "}", "'", ";", ":", ",", ".", "/", "<", ">", "?"]
     
-    for alphabet in alphabets:
-        print(alphabet)
+    secret_code = []
 
+    for alphabet in message:
+        old_letter = alphabet
+
+        if old_letter in alphabets:
+            old_index = alphabets.index(old_letter)
+            new_index = (old_index + shift_value)  % len(alphabets) # returns the remainder using "%" modulus operator which loops back to the start of the list
+            secret_code.append(alphabets[new_index])
+            
+        else:
+            print("Not a valid input!")
+            break
+            
+    code = "".join(secret_code)
+
+    return print(code)
+
+# index + shift value 
 def decrypter(secret_message: list, shift_value: int) -> str:
     """
     This function decrypts the secret code into a message
@@ -37,13 +54,13 @@ def option():
             choice = input("Please choose to encrypt or decrypt a message [e/d] : ").strip().lower()
 
             # Accept a string that the program will either encrypt or decrypt.
-            message = input("\nWhat is your secret message? : ").strip().lower()
+            message = input("\nWhat is your secret message? [No quotation marks!]: ").strip().lower()
 
             shift_value = int(input("Please enter a shift value : "))
             
             # Call the encrypter function to encrypt the message
             if choice == "e":
-                encrypter([message], shift_value)
+                encrypter(message, shift_value)
                 break
 
             # Call th decrypter function to decrypt the message
@@ -61,4 +78,4 @@ def option():
             print("Please input a valid arguements! ")
             continue
 
-encrypter(["boy"], 1)
+option()
