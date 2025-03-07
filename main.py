@@ -9,33 +9,52 @@ def encrypter(message: list, shift_value: int) -> str:
     """
     This function encrypts the message into a secret code 
     """
-    alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+    possible_inputs = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
                   "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+"
                   "[", "]", "|", "{", "}", "'", ";", ":", ",", ".", "/", "<", ">", "?"]
     
-    secret_code = []
+    encoded_list = []
 
-    for alphabet in message:
-        old_letter = alphabet
+    for old_letter in message:
 
-        if old_letter in alphabets:
-            old_index = alphabets.index(old_letter)
-            new_index = (old_index + shift_value)  % len(alphabets) # returns the remainder using "%" modulus operator which loops back to the start of the list
-            secret_code.append(alphabets[new_index])
+        if old_letter in possible_inputs:
+            old_index = possible_inputs.index(old_letter)
+            new_index = (old_index + shift_value)  % len(possible_inputs) # returns the remainder using "%" modulus operator which loops back to the start of the list
+            encoded_list.append(possible_inputs[new_index])
             
         else:
             print("Not a valid input!")
-            break
+            option()
             
-    code = "".join(secret_code)
+    encrypted_message = "".join(encoded_list)
 
-    return print(code)
+    print(encrypted_message)
 
-# index + shift value 
+
 def decrypter(secret_message: list, shift_value: int) -> str:
     """
     This function decrypts the secret code into a message
     """
+    possible_inputs = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+"
+                "[", "]", "|", "{", "}", "'", ";", ":", ",", ".", "/", "<", ">", "?"]
+    
+    decoded_list = []
+
+    for letter in secret_message:
+        if letter in possible_inputs:
+            old_index = possible_inputs.index(letter)
+            new_index = (old_index - shift_value) % len(possible_inputs)
+            decoded_list.append(possible_inputs[new_index])
+
+        else:
+            print("Invalid!")
+            option()
+    decrypted_message = "".join(decoded_list)
+    
+    print(decrypted_message)
+
+
 # One function will encrypt while the other will decrypt using the cipher technique you have chosen. 
 
 # This should involve both loops and if statements.
@@ -56,16 +75,16 @@ def option():
             # Accept a string that the program will either encrypt or decrypt.
             message = input("\nWhat is your secret message? [No quotation marks!]: ").strip().lower()
 
-            shift_value = int(input("Please enter a shift value : "))
+            shift_value = int(input("Please enter a shift value [Same shift value needed to decrypt messages!]: "))
             
             # Call the encrypter function to encrypt the message
             if choice == "e":
                 encrypter(message, shift_value)
-                break
+                continue
 
             # Call th decrypter function to decrypt the message
             elif choice == "d":
-                decrypter([message], shift_value)
+                decrypter(message, shift_value)
                 break
 
             # Continue the loop if a valid choice is not entered
@@ -78,4 +97,5 @@ def option():
             print("Please input a valid arguements! ")
             continue
 
-option()
+if __name__ == "__main__":
+    option()
