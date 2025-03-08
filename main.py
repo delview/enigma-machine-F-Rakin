@@ -144,6 +144,7 @@ def use_again() -> str:
 
         # End the program if user chooses "n"    
         elif choice == "n":
+            print("Thank you for using the Enigma Machine! ")
             break
 
         # Tell user to choose only between "y/n"
